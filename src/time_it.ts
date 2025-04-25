@@ -3,7 +3,7 @@ const nowUsOrMs: () => number = () => {
   if(typeof process === 'object'){
     return Number(process.hrtime.bigint() / 1000n); // node
   } else {
-    return performance.now() * 1000; // browser
+    return performance.now(); // browser
   }
 };
 

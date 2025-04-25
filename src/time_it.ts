@@ -1,7 +1,11 @@
-const nowUsOrMs: () => number = (typeof process === 'object')
-  ? () => Number(process.hrtime.bigint() / 1000n) // node
-  : () => performance.now() * 1000 // browser
-;
+const nowUsOrMs: () => number = () => {
+  /* istanbul ignore else*/
+  if(typeof process === 'object'){
+    return Number(process.hrtime.bigint() / 1000n); // node
+  } else {
+    return performance.now() * 1000; // browser
+  }
+};
 
 export const timeIt = {
   sync: <T>(func: () => T, logTime: (microseconds: number) => void) => {

@@ -1,18 +1,20 @@
 import assert = require("node:assert");
-import {timeIt, timeItAsync} from "./time_it";
+import {timeIt} from "./time_it";
 
 describe("timeIt", () => {
-  it("basics", async () => {
-    let ms = 0;
+  let ms = 0;
 
-    let r = timeIt(
+  it("basic sync", async () => {
+    let r = timeIt.sync(
       () => 1,
       logTime => ms = logTime,
     );
     assert.strictEqual(1, r);
     assert.ok(ms > 0);
+  });
 
-    r = await timeItAsync(
+  it("basic async", async () => {
+    let r = await timeIt.async(
       async () => 2,
       logTime => ms = logTime,
     );

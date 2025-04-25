@@ -18,7 +18,7 @@ The `time_it` package allows for logging the execution time of both synchronous 
 * etc.
 
 # Interface
-The package exports two functions: `timeIt(func, logTime)` and `timeItAsync(func, logTime)` which behave in the same manner except for `timeItAsync(func, logTime)` handling asynchronous `func` arguments. Here `func` refers to the function you wish to execute and time and the result of `func` will be returned by `timeIt(func, logTime)` and `timeItAsync(func, logTime)`.
+The package exports the object `timeIt` with functions: `timeIt.sync(func, logTime)` and `timeIt.async(func, logTime)` which behave in the same manner except for `timeIt.async(func, logTime)` handling asynchronous `func` arguments. Here `func` refers to the function you wish to execute and time and the result of `func` will be returned by `timeIt.sync(func, logTime)` and `timeIt.async(func, logTime)`.
 `logTime` is a function meant to log the recorded execution time in microseconds and should be of the form: `(microseconds) => void`. `logTime` consumes one number, `microseconds` and does not return anything. A simple `logTime` implementation could work as follows:
 ```
 let ms = 0;

@@ -1,18 +1,19 @@
-const nowUs: () => number = (typeof process === 'object')
+const nowUsOrMs: () => number = (typeof process === 'object')
   ? () => Number(process.hrtime.bigint() / 1000n) // node
-  : performance.now // browser
+  : () => performance.now() * 1000 // browser
 ;
 
-export const timeIt = <T>(func: () => T, logTime: (microseconds: number) => void) => {
-  const start = nowUs();
-  const r = func();
-  logTime(nowUs() - start);
-  return r;
-};
-
-export const timeItAsync = async <T>(func: () => Promise<T>, logTime: (microseconds: number) => void) => {
-  const start = nowUs();
-  const r = await func();
-  logTime(nowUs() - start);
-  return r; // microseconds, divide by 1e6 to get seconds.
+export const timeIt = {
+  sync: <T>(func: () => T, logTime: (microseconds: number) => void) => {
+    const start = nowUsOrMs();
+    const r = func();
+    logTime(nowUsOrMs() - start);
+    return r;
+  },
+  async: async <T>(func: () => T, logTime: (microseconds: number) => void) => {
+    const start = nowUsOrMs();
+    const r = await func();
+    logTime(nowUsOrMs() - start);
+    return r; // microseconds, divide by 1e6 to get seconds.
+  }
 };

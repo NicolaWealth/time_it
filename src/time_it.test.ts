@@ -1,4 +1,4 @@
-import assert = require("node:assert");
+import assert from "node:assert/strict";
 import {timeIt} from "./time_it";
 
 describe("timeIt", () => {

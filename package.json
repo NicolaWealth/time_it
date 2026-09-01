@@ -33,7 +33,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf dist/* && rm -f tsconfig.tsbuildinfo",
-    "build": "microbundle --format umd",
+    "build": "rollup --config && tsc --project tsconfig.types.json",
     "rename:esm": "/bin/zsh ./scripts/fix-mjs.sh",
     "lint": "eslint src",
     "test": "mocha",
@@ -49,19 +49,29 @@
   },
   "devDependencies": {
     "@nicolawealth/code_coverage_extractor": "^2",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@types/mocha": "^9",
     "@types/node": "^22",
     "@types/sinon": "^10",
     "@typescript-eslint/eslint-plugin": "^8",
     "eslint": "^9",
     "eslint-config-turbo": "^2",
-    "microbundle": "^0.15.1",
-    "mocha": "^10",
+    "mocha": "^11",
     "mocha-junit-reporter": "^2",
-    "nyc": "^15",
-    "sinon": "^19",
+    "nyc": "^18",
+    "sinon": "^22",
     "ts-node": "^10",
-    "typescript": "^5"
+    "tslib": "^2.8.1",
+    "typescript": "^5",
+    "rollup": "^4.63.1"
+  },
+  "overrides": {
+    "minimatch@9.0.5": "9.0.7",
+    "mocha": {
+      "diff": "8.0.3",
+      "serialize-javascript": "7.0.5"
+    }
   },
   "packageManager": "npm@10.9.0"
 }
